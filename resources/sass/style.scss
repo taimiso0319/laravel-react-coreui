@@ -1,5 +1,5 @@
 // If you want to override variables do it here
-@import "variables";
+@import "./coreui/variables";
 
 // Import styles
 @import "~@coreui/coreui/scss/coreui.scss";
@@ -8,9 +8,9 @@
 @import '~@coreui/coreui/scss/_dropdown-menu-right.scss';
 
 // If you want to add something do it here
-@import "custom";
+@import "./coreui/custom";
 
 // ie fixes
-@import "ie-fix";
+@import "./coreui/ie-fix";
 
 @import '~spinkit/spinkit.css';

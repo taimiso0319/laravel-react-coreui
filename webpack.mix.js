@@ -21,7 +21,15 @@ mix.react('resources/js/app.js', 'public/js')
         "@babel/plugin-proposal-class-properties"
       ],
     });
-
+mix.webpackConfig({
+  devServer: {disableHostCheck: true},
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'resources/js/coreui/'),
+      'static': path.resolve(__dirname, 'resources/static/'),
+    },
+  },
+});
 if (mix.inProduction()) {
   mix.version();
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 // import { renderRoutes } from 'react-router-config';
-import '../sass/App.scss';
+import '../../sass/App.scss';
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
