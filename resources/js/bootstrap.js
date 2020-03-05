@@ -1,4 +1,4 @@
-window._ = require('lodash');
+
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -7,11 +7,49 @@ window._ = require('lodash');
  */
 
 try {
+    window._ = require('lodash');
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
-
+    window.moment = require('moment')
     require('bootstrap');
-} catch (e) {}
+
+    window._.mixin({ pascalCase: _.flow(_.camelCase, _.upperFirst) })
+    // Animate CSS
+    window.$.fn.extend({
+        animateCss: function (animationName, callback) {
+            const animationEnd = (function (element) {
+                const animations = {
+                    animation      : 'animationend',
+                    OAnimation     : 'oAnimationEnd',
+                    MozAnimation   : 'mozAnimationEnd',
+                    WebkitAnimation: 'webkitAnimationEnd',
+                }
+
+                for (const t in animations) {
+                    if (element.style[t] !== undefined)
+                        return animations[t]
+                }
+            })(document.createElement('div'))
+
+            this.addClass(`animated ${animationName}`).one(animationEnd, function () {
+                $(this).removeClass(`animated ${animationName}`)
+
+                if (typeof callback === 'function') callback()
+            })
+
+            return this
+        },
+    })
+    require('bootstrap')
+    require('select2')
+    require('offline-plugin/runtime').install()
+
+    $.fn.select2.defaults.set('theme', 'bootstrap4')
+    $.fn.select2.defaults.set('width', '100%')
+} catch (error) {
+    console.error(error)
+}
+
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -22,6 +60,13 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+const token = document.head.querySelector('meta[name="csrf-token"]')
+
+if (token)
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content
+else
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token')
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
