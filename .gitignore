@@ -8,6 +8,7 @@
 /public/mix-manifest.json
 /public/sw.js
 /public/*.js
+/public/*.LICENSE.txt
 /storage/*.key
 /vendor
 /.idea
