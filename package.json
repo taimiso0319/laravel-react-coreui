@@ -45,7 +45,7 @@
         "lodash": "^4.17.13",
         "moment": "^2.24.0",
         "mutationobserver-shim": "^0.3.3",
-        "node-sass": "^4.13.1",
+        "node-sass": "^7.0.0",
         "path": "^0.12.7",
         "popper.js": "^1.12",
         "prop-types": "^15.7.2",
